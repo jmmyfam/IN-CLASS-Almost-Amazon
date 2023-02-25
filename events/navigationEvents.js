@@ -1,27 +1,45 @@
 import { signOut } from '../utils/auth';
+import { booksOnSale, getBooks } from '../api/bookData';
+import { emptyBooks, showBooks } from '../pages/books';
+import { favoriteAuthors, getAuthors } from '../api/authorData';
+import { emptyAuthors, showAuthors } from '../pages/authors';
 
 // navigation events
 const navigationEvents = () => {
   // LOGOUT BUTTON
-  document.querySelector('#logout-button')
-    .addEventListener('click', signOut);
+  document.querySelector('#logout-button').addEventListener('click', signOut);
 
-  // TODO: BOOKS ON SALE
+  // BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
-    console.warn('CLICKED SALE BOOKS');
+    booksOnSale().then(showBooks);
   });
 
-  // TODO: ALL BOOKS
+  // ALL BOOKS
   document.querySelector('#all-books').addEventListener('click', () => {
-    console.warn('CLICKED ALL BOOKS');
+    getBooks().then((data) => {
+      if (data.length === 0) {
+        emptyBooks();
+      } else {
+        showBooks(data);
+      }
+    });
   });
 
-  // FIXME: STUDENTS Create an event listener for the Authors
-  // 1. When a user clicks the authors link, make a call to firebase to get all authors
-  // 2. Convert the response to an array because that is what the makeAuthors function is expecting
-  // 3. If the array is empty because there are no authors, make sure to use the emptyAuthor function
+  // ALL Authors
   document.querySelector('#authors').addEventListener('click', () => {
-    console.warn('CLICKED AUTHORS');
+    getAuthors().then((data) => {
+      if (data.length === 0) {
+        emptyAuthors();
+      } else {
+        showAuthors(data);
+      }
+    });
+    // console.warn('CLICKED AUTHORS');
+  });
+
+  // Favorite Authors
+  document.querySelector('#favAuthors').addEventListener('click', () => {
+    favoriteAuthors().then(showAuthors);
   });
 
   // STRETCH: SEARCH
