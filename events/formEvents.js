@@ -1,12 +1,12 @@
-import { createBook, updateBook, getBooks } from '../api/bookData';
-import { showBooks } from '../pages/books';
 import { createAuthor, getAuthors, updateAuthor } from '../api/authorData';
+import { createBook, getBooks, updateBook } from '../api/bookData';
 import { showAuthors } from '../pages/authors';
+import { showBooks } from '../pages/books';
 
 const formEvents = () => {
   document.querySelector('#main-container').addEventListener('submit', (e) => {
     e.preventDefault();
-    // CLICK EVENT FOR SUBMITTING FORM FOR ADDING A BOOK
+    // TODO: CLICK EVENT FOR SUBMITTING FORM FOR ADDING A BOOK
     if (e.target.id.includes('submit-book')) {
       const payload = {
         title: document.querySelector('#title').value,
@@ -24,7 +24,7 @@ const formEvents = () => {
       });
     }
 
-    // CLICK EVENT FOR EDITING A BOOK
+    // TODO: CLICK EVENT FOR EDITING A BOOK
     if (e.target.id.includes('update-book')) {
       const [, firebaseKey] = e.target.id.split('--');
       const payload = {
@@ -40,8 +40,7 @@ const formEvents = () => {
         getBooks().then(showBooks);
       });
     }
-
-    // ADD CLICK EVENT FOR SUBMITTING FORM FOR ADDING AN AUTHOR
+    // FIXME: ADD CLICK EVENT FOR SUBMITTING FORM FOR ADDING AN AUTHOR
     if (e.target.id.includes('submit-author')) {
       const payload = {
         first_name: document.querySelector('#first_name').value,
@@ -56,10 +55,9 @@ const formEvents = () => {
         });
       });
     }
-    // ADD CLICK EVENT FOR EDITING AN AUTHOR
+    // FIXME:ADD CLICK EVENT FOR EDITING AN AUTHOR
     if (e.target.id.includes('update-author')) {
       const [, firebaseKey] = e.target.id.split('--');
-      console.warn(document.querySelector('#favorite').value);
       const payload = {
         first_name: document.querySelector('#first_name').value,
         last_name: document.querySelector('#last_name').value,
@@ -73,5 +71,7 @@ const formEvents = () => {
     }
   });
 };
+
+// CLICK EVENT FOR EDITING AUTHOR
 
 export default formEvents;

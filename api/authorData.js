@@ -2,7 +2,7 @@ import client from '../utils/client';
 
 const endpoint = client.databaseURL;
 
-// GET ALL AUTHORS
+// FIXME:  GET ALL AUTHORS
 const getAuthors = () => new Promise((resolve, reject) => {
   fetch(`${endpoint}/authors.json`, {
     method: 'GET',
@@ -15,8 +15,8 @@ const getAuthors = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// FILTER AUTHORS BY FAVORITE
-const favoriteAuthors = () => new Promise((resolve, reject) => {
+// Favorite Author
+const getFavAuthors = () => new Promise((resolve, reject) => {
   fetch(`${endpoint}/authors.json?orderBy="favorite"&equalTo=true`, {
     method: 'GET',
     headers: {
@@ -27,8 +27,7 @@ const favoriteAuthors = () => new Promise((resolve, reject) => {
     .then((data) => resolve(Object.values(data)))
     .catch(reject);
 });
-
-// CREATE AUTHOR
+// FIXME: CREATE AUTHOR
 const createAuthor = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/authors.json`, {
     method: 'POST',
@@ -55,7 +54,7 @@ const getSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// DELETE AUTHOR
+// FIXME: DELETE AUTHOR
 const deleteSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/authors/${firebaseKey}.json`, {
     method: 'DELETE',
@@ -68,7 +67,7 @@ const deleteSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// UPDATE AUTHOR
+// FIXME: UPDATE AUTHOR
 const updateAuthor = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/authors/${payload.firebaseKey}.json`, {
     method: 'PATCH',
@@ -83,8 +82,8 @@ const updateAuthor = (payload) => new Promise((resolve, reject) => {
 });
 
 // TODO: GET A SINGLE AUTHOR'S BOOKS
-const getAuthorBooks = (obj) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/books.json?orderBy="author_id"&equalTo="${obj.firebaseKey}"`, {
+const getAuthorBooks = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/books.json?orderBy="author_id"&equalTo="${firebaseKey}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -102,5 +101,5 @@ export {
   deleteSingleAuthor,
   updateAuthor,
   getAuthorBooks,
-  favoriteAuthors,
+  getFavAuthors,
 };
