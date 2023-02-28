@@ -73,8 +73,9 @@ body {
         font-size: 1em;
         background-color: blue;
       }
-      i{
-        padding: 5px;
+      .fav-badge{
+        font-size: 1em;
+        background-color: gold;
       }
     }
 
@@ -98,10 +99,4 @@ body {
   .description {
     white-space: pre-wrap;
   }
-}
-#bookDetail{
-  padding: 2em;
-  color: white;
-  text-align: left;
-  width: 50%;
 }
