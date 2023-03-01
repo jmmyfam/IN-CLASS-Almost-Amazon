@@ -7,7 +7,7 @@ import { showAuthors } from '../pages/authors';
 import { showBooks } from '../pages/books';
 import viewBook from '../pages/viewBook';
 
-const domEvents = () => {
+const domEvents = (user) => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
     // TODO: CLICK EVENT FOR DELETING A BOOK
     if (e.target.id.includes('delete-book')) {
@@ -16,7 +16,7 @@ const domEvents = () => {
         console.warn('CLICKED DELETE BOOK', e.target.id);
         const [, firebaseKey] = e.target.id.split('--');
         deleteBook(firebaseKey).then(() => {
-          getBooks().then(showBooks);
+          getBooks(user.uid).then(showBooks);
         });
       }
     }
@@ -45,7 +45,7 @@ const domEvents = () => {
         console.warn('DELETE AUTHOR', e.target.id);
         const [, firebaseKey] = e.target.id.split('--');
         deleteAuthorBooksRelationship(firebaseKey).then(() => {
-          getAuthors().then(showAuthors);
+          getAuthors(user.uid).then(showAuthors);
         });
       }
     }
