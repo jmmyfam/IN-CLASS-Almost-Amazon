@@ -6,7 +6,7 @@ import { showBooks } from '../pages/books';
 const formEvents = (user) => {
   document.querySelector('#main-container').addEventListener('submit', (e) => {
     e.preventDefault();
-    // TODO: CLICK EVENT FOR SUBMITTING FORM FOR ADDING A BOOK
+
     if (e.target.id.includes('submit-book')) {
       const payload = {
         title: document.querySelector('#title').value,
@@ -25,7 +25,6 @@ const formEvents = (user) => {
       });
     }
 
-    // TODO: CLICK EVENT FOR EDITING A BOOK
     if (e.target.id.includes('update-book')) {
       const [, firebaseKey] = e.target.id.split('--');
       const payload = {
@@ -41,7 +40,7 @@ const formEvents = (user) => {
         getBooks(user.uid).then(showBooks);
       });
     }
-    // FIXME: ADD CLICK EVENT FOR SUBMITTING FORM FOR ADDING AN AUTHOR
+
     if (e.target.id.includes('submit-author')) {
       const payload = {
         first_name: document.querySelector('#first_name').value,
@@ -57,7 +56,7 @@ const formEvents = (user) => {
         });
       });
     }
-    // FIXME:ADD CLICK EVENT FOR EDITING AN AUTHOR
+
     if (e.target.id.includes('update-author')) {
       const [, firebaseKey] = e.target.id.split('--');
       const payload = {
