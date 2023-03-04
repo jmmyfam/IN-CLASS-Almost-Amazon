@@ -21,12 +21,12 @@ const domEvents = (user) => {
     }
 
     if (e.target.id.includes('add-book-btn')) {
-      addBookForm();
+      addBookForm(user);
     }
 
     if (e.target.id.includes('edit-book-btn')) {
       const [, firebaseKey] = e.target.id.split('--');
-      getSingleBook(firebaseKey).then((bookObj) => addBookForm(bookObj));
+      getSingleBook(firebaseKey).then((bookObj) => addBookForm(user, bookObj));
     }
 
     if (e.target.id.includes('view-book-btn')) {
